@@ -17,9 +17,29 @@ public class FingerSpawn : MonoBehaviour
     [SerializeField]
     bool reset, spawn, snapFirst, snapLast;
 
+    public Transform currentSpawnPoint;
+
+    void Start()
+    {
+        currentSpawnPoint = transform;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        // GameObject tmp;
+        // tmp = Instantiate(partPrefab, new Vector3(currentSpawnPoint.position.x, currentSpawnPoint.position.y, currentSpawnPoint.position.z), Quaternion.identity, parentObject.transform);
+        // tmp.transform.eulerAngles = new Vector3(90, 0, 0);
+        // tmp.name = parentObject.transform.childCount.ToString();
+
+        // foreach (Transform child in parentObject.transform)
+        // {
+        //     if (child.gameObject.name.Equals(tmp.name))
+        //     {
+        //         currentSpawnPoint = child;
+        //         break;
+        //     }
+        // }
         if (reset)
         {
             foreach (GameObject tmp in GameObject.FindGameObjectsWithTag("Player"))
@@ -44,9 +64,22 @@ public class FingerSpawn : MonoBehaviour
         {
             GameObject tmp;
 
-            tmp = Instantiate(partPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z - partDistance * 2 * (x + 1)), Quaternion.identity, parentObject.transform);
+            Vector3 desiredPosition = new Vector3(currentSpawnPoint.position.x, currentSpawnPoint.position.y, currentSpawnPoint.position.z - partDistance * 2 * (x + 1));
+
+            // tmp = Instantiate(partPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z - partDistance * 2 * (x + 1)), Quaternion.identity, parentObject.transform);
+            tmp = Instantiate(partPrefab, desiredPosition, Quaternion.identity, parentObject.transform);
             tmp.transform.eulerAngles = new Vector3(90, 0, 0);
             tmp.name = parentObject.transform.childCount.ToString();
+
+            foreach (Transform child in parentObject.transform)
+            {
+                if (child.gameObject.name.Equals(tmp.name))
+                {
+                    currentSpawnPoint = child;
+                    break;
+                }
+            }
+
             if (x == 0)
             {
                 Destroy(tmp.GetComponent<CharacterJoint>());

@@ -218,12 +218,13 @@ MonoBehaviour:
   partPrefab: {fileID: 1936863569533307181, guid: 49b9fcdaaeadd644eb285b60cc9a5694,
     type: 3}
   parentObject: {fileID: 1202556013}
-  length: 4
+  length: 1
   partDistance: 1
   reset: 0
   spawn: 0
   snapFirst: 0
   snapLast: 0
+  currentSpawnPoint: {fileID: 0}
 --- !u!1001 &474198639
 PrefabInstance:
   m_ObjectHideFlags: 0

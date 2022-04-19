@@ -29,6 +29,6 @@ public class MoveByTouch : MonoBehaviour
         Vector3 move = Vector3.forward * speedUpdown + Vector3.right * translation * speedRightLeft;
         controller.Move(move * Time.deltaTime);
         modelTransform.rotation = Quaternion.Euler(localRotation.x, Mathf.Lerp(-20, 20, translation / 2 + 0.5f), localRotation.z);
-        
+
     }
 }
