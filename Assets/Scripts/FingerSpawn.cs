@@ -5,17 +5,22 @@ using UnityEngine;
 public class FingerSpawn : MonoBehaviour
 {
     [SerializeField]
-    GameObject partPrefab, parentObject;
+    GameObject partPrefab;
+    // , parentObject;
 
     [SerializeField]
-    [Range(1, 1000)]
-    int length = 1;
+    private GameObject rootFinger;
+
+    // [SerializeField]
+    // [Range(1, 1000)]
+    // int length = 1;
 
     [SerializeField]
-    float partDistance = 0.75f;
+    float partDistance = 1.1f;
 
     [SerializeField]
-    bool reset, spawn, snapFirst, snapLast;
+    bool reset, spawn;
+    // snapFirst, snapLast;
 
     public Transform currentSpawnPoint;
 
@@ -24,31 +29,16 @@ public class FingerSpawn : MonoBehaviour
         currentSpawnPoint = transform;
     }
 
+    private bool firstInit = true;
+
     // Update is called once per frame
     void Update()
     {
-        // GameObject tmp;
-        // tmp = Instantiate(partPrefab, new Vector3(currentSpawnPoint.position.x, currentSpawnPoint.position.y, currentSpawnPoint.position.z), Quaternion.identity, parentObject.transform);
-        // tmp.transform.eulerAngles = new Vector3(90, 0, 0);
-        // tmp.name = parentObject.transform.childCount.ToString();
 
-        // foreach (Transform child in parentObject.transform)
+        // if (reset)
         // {
-        //     if (child.gameObject.name.Equals(tmp.name))
-        //     {
-        //         currentSpawnPoint = child;
-        //         break;
-        //     }
+        //     Destroy(childFingerList[childFingerList.Count - 1]);
         // }
-        if (reset)
-        {
-            foreach (GameObject tmp in GameObject.FindGameObjectsWithTag("Player"))
-            {
-                Destroy(tmp);
-            }
-
-            reset = false;
-        }
 
         if (spawn)
         {
@@ -57,45 +47,67 @@ public class FingerSpawn : MonoBehaviour
         }
     }
 
+    List<GameObject> childFingerList = new List<GameObject>();
     public void Spawn()
     {
-        int count = (int)(length / partDistance);
+        int count = 1;
         for (int x = 0; x < count; x++)
         {
             GameObject tmp;
 
-            Vector3 desiredPosition = new Vector3(currentSpawnPoint.position.x, currentSpawnPoint.position.y, currentSpawnPoint.position.z - partDistance * 2 * (x + 1));
+            Vector3 desiredPosition = new Vector3(currentSpawnPoint.position.x, currentSpawnPoint.position.y, currentSpawnPoint.position.z - partDistance);
 
             // tmp = Instantiate(partPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z - partDistance * 2 * (x + 1)), Quaternion.identity, parentObject.transform);
-            tmp = Instantiate(partPrefab, desiredPosition, Quaternion.identity, parentObject.transform);
+            tmp = Instantiate(partPrefab, desiredPosition, Quaternion.identity);
+            childFingerList.Add(tmp);
             tmp.transform.eulerAngles = new Vector3(90, 0, 0);
-            tmp.name = parentObject.transform.childCount.ToString();
+            // tmp.name = parentObject.transform.childCount.ToString();
+            tmp.name = childFingerList.Count.ToString();
 
-            foreach (Transform child in parentObject.transform)
+            // foreach (Transform child in parentObject.transform)  // di chuyen con tro xuong duoi // use List
+            // {
+            //     if (child.gameObject.name.Equals(tmp.name))
+            //     {
+            //         currentSpawnPoint = child;
+            //         break;
+            //     }
+            // }
+
+            foreach (GameObject child in childFingerList)
             {
                 if (child.gameObject.name.Equals(tmp.name))
                 {
-                    currentSpawnPoint = child;
+                    currentSpawnPoint = child.transform;
                     break;
                 }
             }
 
-            if (x == 0)
+            // if (x == 0)
+            // {
+            //     Destroy(tmp.GetComponent<CharacterJoint>());
+            //     tmp.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            // }
+            // else
+            // {
+            //     tmp.GetComponent<CharacterJoint>().connectedBody = childFingerList[childFingerList.Count - 2].GetComponent<Rigidbody>();
+            // }
+
+
+            if (firstInit)
             {
-                Destroy(tmp.GetComponent<CharacterJoint>());
-                if (snapFirst)
-                {
-                    tmp.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                }
+                tmp.GetComponent<CharacterJoint>().connectedBody = rootFinger.GetComponent<Rigidbody>();
+                firstInit = false;
             }
             else
             {
-                tmp.GetComponent<CharacterJoint>().connectedBody = parentObject.transform.Find((parentObject.transform.childCount - 1).ToString()).GetComponent<Rigidbody>();
+                tmp.GetComponent<CharacterJoint>().connectedBody = childFingerList[childFingerList.Count - 2].GetComponent<Rigidbody>();
             }
-        }
-        if (snapLast)
-        {
-            parentObject.transform.Find((parentObject.transform.childCount).ToString()).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
         }
     }
 }
+
+// if (snapLast)
+// {
+//parentObject.transform.Find((parentObject.transform.childCount).ToString()).GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+// }

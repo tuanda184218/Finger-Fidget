@@ -2,22 +2,23 @@
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField]
+    private FingerSpawn fingerSpawn;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("childFinger"))
         {
-            Debug.Log("You've eaten childFinger!");
-            changeLength();
+            Debug.Log("childFinger!!");
+            collectFinger();
         }
-        else
+        else if (other.gameObject.CompareTag("obstacle"))
         {
-            Debug.Log("What sup bro!");
+            Debug.Log("obstacle!");
         }
     }
 
-    void changeLength()
+    private void collectFinger()
     {
-        // Vector3 objectScale = transform.localScale;
-        // transform.localScale = new Vector3(0, 0, objectScale.z * 2);
+        fingerSpawn.Spawn();
     }
 }
