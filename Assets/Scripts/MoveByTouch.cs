@@ -10,9 +10,11 @@ public class MoveByTouch : MonoBehaviour
     protected Joystick joystick;
     protected Joybutton joybutton;
 
-    public float speedUpdown = 20f;
+    public float speedUpdown = 10f;
 
-    public float speedRightLeft = 80f;
+    public float speedRightLeft = 10f;
+
+    // public float smoothSpeed = 0.5f;
 
     public CharacterController controller;
     private Vector3 localRotation;
@@ -29,7 +31,6 @@ public class MoveByTouch : MonoBehaviour
         modelTransform.rotation = Quaternion.Euler(localRotation.x, Mathf.Lerp(-20, 20, translation / 2 + 0.5f), localRotation.z);
         Vector3 move = Vector3.right * translation * speedRightLeft + Vector3.forward * speedUpdown;
         controller.Move(move * Time.deltaTime);
-
 
     }
 }

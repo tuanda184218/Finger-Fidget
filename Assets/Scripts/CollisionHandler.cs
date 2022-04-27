@@ -6,9 +6,9 @@ public class CollisionHandler : MonoBehaviour
     private FingerSpawn fingerSpawn;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("childFinger"))
+        if (other.gameObject.CompareTag("food"))
         {
-            Debug.Log("childFinger!!");
+            Debug.Log("food!!");
             collectFinger();
         }
         else if (other.gameObject.CompareTag("obstacle"))
