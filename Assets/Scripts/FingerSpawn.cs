@@ -55,8 +55,7 @@ public class FingerSpawn : MonoBehaviour
         {
             GameObject tmp;
 
-            Vector3 desiredPosition = new Vector3(currentSpawnPoint.position.x, currentSpawnPoint.position.y, currentSpawnPoint.position.z);
-
+            //Vector3 desiredPosition = new Vector3(currentSpawnPoint.position.x, currentSpawnPoint.position.y, currentSpawnPoint.position.z);
             tmp = Instantiate(partPrefab, currentSpawnPoint.position - currentSpawnPoint.forward, currentSpawnPoint.rotation);
             childFingerList.Add(tmp);
             tmp.transform.eulerAngles = new Vector3(90, 0, 0);

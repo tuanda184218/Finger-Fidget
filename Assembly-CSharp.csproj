@@ -46,10 +46,10 @@
      <Compile Include="Assets\Scripts\CollectingFinger.cs" />
      <Compile Include="Assets\Scripts\CollisionHandler.cs" />
      <Compile Include="Assets\Scripts\FingerCamera.cs" />
+     <Compile Include="Assets\Scripts\FingerRotation.cs" />
      <Compile Include="Assets\Scripts\FingerSpawn.cs" />
      <Compile Include="Assets\Scripts\GroundSpawner.cs" />
      <Compile Include="Assets\Scripts\GroundTile.cs" />
-     <Compile Include="Assets\Scripts\HitObstacle.cs" />
      <Compile Include="Assets\Scripts\Joybutton.cs" />
      <Compile Include="Assets\Scripts\MoveByTouch.cs" />
     <Reference Include="UnityEngine">
