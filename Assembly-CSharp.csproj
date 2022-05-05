@@ -36,6 +36,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\FingerBlaBla.cs" />
      <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
      <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
      <Compile Include="Assets\Joystick Pack\Scripts\Base\Joystick.cs" />
@@ -43,15 +44,14 @@
      <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
      <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
      <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
+     <Compile Include="Assets\Movement.cs" />
      <Compile Include="Assets\Scripts\CollectingFinger.cs" />
      <Compile Include="Assets\Scripts\CollisionHandler.cs" />
      <Compile Include="Assets\Scripts\FingerCamera.cs" />
      <Compile Include="Assets\Scripts\FingerRotation.cs" />
-     <Compile Include="Assets\Scripts\FingerSpawn.cs" />
      <Compile Include="Assets\Scripts\GroundSpawner.cs" />
      <Compile Include="Assets\Scripts\GroundTile.cs" />
      <Compile Include="Assets\Scripts\Joybutton.cs" />
-     <Compile Include="Assets\Scripts\MoveByTouch.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.27f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
